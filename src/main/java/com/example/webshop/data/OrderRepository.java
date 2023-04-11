@@ -1,4 +1,4 @@
 package com.example.webshop.data;
 
-public class OrderRepository {
+public interface OrderRepository {
 }

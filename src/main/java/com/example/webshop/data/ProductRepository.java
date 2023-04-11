@@ -1,4 +1,7 @@
 package com.example.webshop.data;
 
-public class ProductRepository {
+import com.example.webshop.business.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductRepository extends JpaRepository<Product,Long> {
 }
