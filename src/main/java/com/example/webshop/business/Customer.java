@@ -19,6 +19,17 @@ public class Customer {
     private String email;
     @NotBlank
     private String password;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<CustomerOrder> customerOrders;
 
+    public Customer() {
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

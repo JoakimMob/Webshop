@@ -1,4 +1,6 @@
 package com.example.webshop.data;
 
-public interface OrderRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderRepository extends JpaRepository {
 }
