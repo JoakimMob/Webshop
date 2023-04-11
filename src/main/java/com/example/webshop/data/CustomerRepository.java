@@ -1,6 +1,12 @@
 package com.example.webshop.data;
 
+import com.example.webshop.business.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomerRepository extends JpaRepository {
+import java.util.List;
+import java.util.Optional;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    Optional<Customer>findByEmail(String email);
+    List<Customer> findByEmailAndPassword(String email, String password);
 }
