@@ -34,6 +34,14 @@ public class WebShopService {
         return productRepository.findAll();
     }
 
+    public List<Customer> getAllCustomers(){
+        return customerRepository.findAll();
+    }
+
+    public Product getByIdProduct(long id){
+        return productRepository.findById(id).get();
+    }
+
     public Product addProduct(String productName, String productCategory, Double productPrice) {
         product = productRepository.save(new Product(productName, productCategory, productPrice));
         return product;
@@ -43,7 +51,7 @@ public class WebShopService {
         List<Customer> customerList = customerRepository.findByEmailAndPassword(loginUser, password);
         if (customerList.isEmpty()) {
             customer = customerRepository.save(new Customer(loginUser, password));
-            return "";
+            return "User now registered";
         }
         return "User already exists";
     }
