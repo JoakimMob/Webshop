@@ -16,7 +16,7 @@ public class WebShopController {
     @PostMapping("/login")
     public String login(@RequestParam String loginUser, @RequestParam String password, Model m){
         m.addAttribute("person", webShopService.login(loginUser,password));
-        return "products";
+        return "productSite";
     }
 
     @GetMapping("/register")
@@ -28,7 +28,17 @@ public class WebShopController {
     public String register(@RequestParam String loginUser, @RequestParam String password, Model m){
         String check= webShopService.checkIfUserExists(loginUser,password);
         m.addAttribute("check", check);
-        return "redirect:/index.html";
+        return "register";
+    }
+    @GetMapping("/addProducts")
+    public String addProductSite(){
+        return "addProducts";
+    }
+
+    @PostMapping("/productSite")
+    public String showAllProducts(Model m){
+        m.addAttribute("productSite", webShopService.getAll());
+        return "productSite";
     }
 
 
