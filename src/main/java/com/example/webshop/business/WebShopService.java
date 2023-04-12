@@ -20,4 +20,20 @@ public class WebShopService {
         customer = customerList.get(1);
         return customer;
     }
+
+    public WebShopService(){
+    }
+
+    public List<Customer> getAll(){
+        return customerRepository.findAll();
+    }
+
+    public String checkIfUserExists(String loginUser, String password){
+        List<Customer> customerList = customerRepository.findByEmailAndPassword(loginUser,password);
+        if (customerList.isEmpty()){
+            customer = customerRepository.save(new Customer(loginUser,password));
+            return "";
+        }
+        return "User already exists";
+    }
 }
