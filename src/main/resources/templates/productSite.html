@@ -5,17 +5,17 @@
   <title>Title</title>
 </head>
 <body>
-<form action="/productsite" method="post">
-  <div th:each="p : ${productSite}">
-    Name: <span th:text="${p.name}"></span>
-    Price: <span th:text="${p.price}"></span>
-    Category: <span th:text="${p.category}"></span>
-    Total amount: <input type="number" name="amount">
-    <form action="/product" method="get">
-      <input type="hidden" name="id" th:value="${p.id}" >
-      <input type="submit" value="Buy">
-    </form>
-  </div>
-</form>
+<div th:each="p : ${products}">
+  Name: <span th:text="${p.name}"></span>
+  Price: <span th:text="${p.price}"></span>
+  Category: <span th:text="${p.category}"></span>
+  <form action="/addtocart" method="post">
+    Amount to Buy: <input type="number" name="amount" value="1">
+    <input type="hidden" name="index" th:value="${p.id}">
+    <input type="submit" value="Buy">
+  </form>
+</div>
+
+<a href="showCart">Show Cart</a>
 </body>
 </html>

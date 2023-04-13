@@ -1,5 +1,6 @@
 package com.example.webshop.ui;
 
+import com.example.webshop.business.Cart;
 import com.example.webshop.business.WebShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class WebShopController {
     @PostMapping("/login")
     public String login(@RequestParam String loginUser, @RequestParam String password, Model m) {
         m.addAttribute("person", webShopService.login(loginUser, password));
+        m.addAttribute("products", webShopService.getAllProducts());
         return "productSite";
     }
 
@@ -36,16 +38,24 @@ public class WebShopController {
         return "addProducts";
     }
 
-    @PostMapping("/productSite")
-    public String showAllProducts(Model m) {
-        m.addAttribute("productSite", webShopService.getAllProducts());
+    @PostMapping("/addtocart")
+    public String addToCart(@RequestParam Long index, @RequestParam int amount, Model m) {
+        Cart cart=webShopService.addProductToCart(index,amount);
+        m.addAttribute("products", webShopService.getAllProducts());
+        m.addAttribute("cart", cart);
         return "productSite";
+    }
+
+    @GetMapping("/showcart")
+    public String showCart(Model m){
+        m.addAttribute("cart", webShopService.getCart());
+        return "showCart";
     }
 
     @PostMapping("/addProducts")
     public String addProduct(@RequestParam String productName, @RequestParam String category, @RequestParam Double productPrice
             , Model m) {
-        m.addAttribute("product", webShopService.addProduct(productName, category, productPrice));
+        m.addAttribute("product", webShopService.addProductToDB(productName, category, productPrice));
         return "addProducts";
     }
 

@@ -20,14 +20,16 @@ public class WebShopService {
 
     Customer customer;
     Product product;
+    Cart cart;
 
     public Customer login(String loginUser, String password) {
         List<Customer> customerList = customerRepository.findByEmailAndPassword(loginUser, password);
-        customer = customerList.get(1);
+        customer = customerList.get(0);
         return customer;
     }
 
     public WebShopService() {
+        cart=new Cart();
     }
 
     public List<Product> getAllProducts() {
@@ -42,9 +44,18 @@ public class WebShopService {
         return productRepository.findById(id).get();
     }
 
-    public Product addProduct(String productName, String productCategory, Double productPrice) {
+    public Product addProductToDB(String productName, String productCategory, Double productPrice) {
         product = productRepository.save(new Product(productName, productCategory, productPrice));
         return product;
+    }
+
+    public Cart addProductToCart(Long id, int amount){
+        cart.cartItems.add(new CartItem(getByIdProduct(id), amount));
+        return cart;
+    }
+
+    public Cart getCart(){
+        return cart;
     }
 
     public String checkIfUserExists(String loginUser, String password) {
