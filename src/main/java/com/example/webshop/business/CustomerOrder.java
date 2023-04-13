@@ -20,6 +20,10 @@ public class CustomerOrder {
         this.cartItems = cartItems;
     }
 
+    public CustomerOrder(List<CartItem> cartItems){
+        this.cartItems = cartItems;
+    }
+
     public CustomerOrder() {
     }
 

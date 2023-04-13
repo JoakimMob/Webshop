@@ -68,5 +68,12 @@ public class WebShopController {
         return "showCart";
     }
 
+    @PostMapping("/placeorder")
+    public String placeOrder(Model m){
+        webShopService.addToOrder();
+        m.addAttribute("customerorder", webShopService.getCustomerOrder());
+        return "placedOrder";
+    }
+
 
 }
