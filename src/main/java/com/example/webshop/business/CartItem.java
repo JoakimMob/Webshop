@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class CartItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -44,5 +44,9 @@ public class CartItem {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public void removeOneFromAmount(){
+        this.amount--;
     }
 }

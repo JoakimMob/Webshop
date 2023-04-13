@@ -58,6 +58,10 @@ public class WebShopService {
         return cart;
     }
 
+    public List<CartItem> removeCartItem(int id){
+        return cart.removeItemFromCart(id);
+    }
+
     public String checkIfUserExists(String loginUser, String password) {
         List<Customer> customerList = customerRepository.findByEmailAndPassword(loginUser, password);
         if (customerList.isEmpty()) {

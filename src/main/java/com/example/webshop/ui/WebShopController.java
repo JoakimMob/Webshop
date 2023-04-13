@@ -59,5 +59,12 @@ public class WebShopController {
         return "addProducts";
     }
 
+    @PostMapping("/removeproductfromcart")
+    public String removeFromCart(@RequestParam Integer id, Model m){
+        webShopService.removeCartItem(id);
+        m.addAttribute("cart",webShopService.getCart());
+        return "showCart";
+    }
+
 
 }

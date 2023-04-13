@@ -13,7 +13,19 @@ public class Cart {
         return cartItems;
     }
 
+    public List<CartItem> removeItemFromCart(int id){
+        if (getCartItems().get(id).getAmount() == 1){
+            getCartItems().remove(id);
+        } else {
+            getCartItems().get(id).removeOneFromAmount();
+        }
+        return getCartItems();
+    }
+
     public Cart(){
         this.cartItems=new ArrayList<>();
     }
+
+
+
 }
