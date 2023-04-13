@@ -39,6 +39,14 @@ public class Customer {
         customerOrders= new ArrayList<>();
     }
 
+    public List<CustomerOrder> getCustomerOrders() {
+        return customerOrders;
+    }
+
+    public void setCustomerOrders(List<CustomerOrder> customerOrders) {
+        this.customerOrders = customerOrders;
+    }
+
     public Long getId() {
         return id;
     }

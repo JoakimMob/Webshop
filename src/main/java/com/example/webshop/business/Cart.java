@@ -24,8 +24,8 @@ public class Cart {
 
     public Double sumOfAllProducts(){
         Double temp =0.0;
-        for (int i = 0; i < cartItems.size(); i++) {
-            temp += (int) (cartItems.get(i).product.getPrice()*cartItems.get(i).amount);
+        for (CartItem cartItem : cartItems) {
+            temp += (int) (cartItem.product.getPrice() * cartItem.amount);
         }
         return temp;
     }
