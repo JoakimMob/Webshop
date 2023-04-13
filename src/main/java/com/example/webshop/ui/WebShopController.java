@@ -40,15 +40,16 @@ public class WebShopController {
 
     @PostMapping("/addtocart")
     public String addToCart(@RequestParam Long index, @RequestParam int amount, Model m) {
-        Cart cart=webShopService.addProductToCart(index,amount);
+        Cart cart = webShopService.addProductToCart(index, amount);
         m.addAttribute("products", webShopService.getAllProducts());
         m.addAttribute("cart", cart);
         return "productSite";
     }
 
     @GetMapping("/showcart")
-    public String showCart(Model m){
+    public String showCart(Model m) {
         m.addAttribute("cart", webShopService.getCart());
+        m.addAttribute("amount", webShopService.getCart().sumOfAllProducts());
         return "showCart";
     }
 
@@ -60,9 +61,10 @@ public class WebShopController {
     }
 
     @PostMapping("/removeproductfromcart")
-    public String removeFromCart(@RequestParam Integer id, Model m){
+    public String removeFromCart(@RequestParam Integer id, Model m) {
         webShopService.removeCartItem(id);
-        m.addAttribute("cart",webShopService.getCart());
+        m.addAttribute("amount", webShopService.getCart().sumOfAllProducts());
+        m.addAttribute("cart", webShopService.getCart());
         return "showCart";
     }
 

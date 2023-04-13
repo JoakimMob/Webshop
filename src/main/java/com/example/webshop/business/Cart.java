@@ -22,6 +22,14 @@ public class Cart {
         return getCartItems();
     }
 
+    public Double sumOfAllProducts(){
+        Double temp =0.0;
+        for (int i = 0; i < cartItems.size(); i++) {
+            temp += (int) (cartItems.get(i).product.getPrice()*cartItems.get(i).amount);
+        }
+        return temp;
+    }
+
     public Cart(){
         this.cartItems=new ArrayList<>();
     }

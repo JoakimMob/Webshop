@@ -30,4 +30,16 @@ public class Product {
         this.category = category;
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
 }
