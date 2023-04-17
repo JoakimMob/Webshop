@@ -37,6 +37,14 @@ public class WebShopService {
         return productRepository.findByName(productName);
     }
 
+    public List<Product> getAllCategories(){
+        return (List<Product>) productRepository.findAll().stream().map(Product::getCategory);
+    }
+
+    public List<Product> findProductByCategory(String category){
+        return productRepository.findByCategory(category);
+    }
+
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }

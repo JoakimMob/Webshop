@@ -3,6 +3,7 @@ package com.example.webshop.ui;
 import com.example.webshop.business.Cart;
 import com.example.webshop.business.WebShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ public class WebShopController {
     public String login(@RequestParam String loginUser, @RequestParam String password, Model m) {
         m.addAttribute("person", webShopService.login(loginUser, password));
         m.addAttribute("products", webShopService.getAllProducts());
+        m.addAttribute("category", webShopService.getAllCategories());
         return "productSite";
     }
 
@@ -42,6 +44,8 @@ public class WebShopController {
     public String addToCart(@RequestParam Long index, @RequestParam int amount, Model m) {
         Cart cart = webShopService.addProductToCart(index, amount);
         m.addAttribute("products", webShopService.getAllProducts());
+        m.addAttribute("category", webShopService.getAllCategories());
+        System.out.println(index + " Cart " + amount);
         m.addAttribute("cart", cart);
         return "productSite";
     }
@@ -78,6 +82,14 @@ public class WebShopController {
     @PostMapping("/showspecificproduct")
     public String searchForSpecificProduct(Model m, @RequestParam String searchedName){
         m.addAttribute("products", webShopService.findProduct(searchedName));
+        m.addAttribute("category", webShopService.getAllCategories());
+        return "productSite";
+    }
+
+    @PostMapping("/showspecificcategory")
+    public String searchForSpecificCategory(Model m, @RequestParam String chosenCategory){
+        m.addAttribute("category", webShopService.getAllCategories());
+        m.addAttribute("products", webShopService.findProductByCategory(chosenCategory));
         return "productSite";
     }
 

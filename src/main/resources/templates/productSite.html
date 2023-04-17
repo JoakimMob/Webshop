@@ -6,8 +6,15 @@
 </head>
 <body>
 <form action="/showspecificproduct" method="post">
-  Searh bar: <input type="text" name="specifiedProduct">
+  Search bar: <input type="text" name="specifiedProduct">
   <input type="submit" th:value="Submit">
+</form>
+<form action="/showspecificcategory" method="post">
+  <select name="chosencategory" onchange="this.form.submit()">
+    <option>--</option>
+    <option th:each="c : ${category}" th:text="${c}" th:value="${c}">
+    </option>
+  </select>
 </form>
 <div th:each="p : ${products}">
   Name: <span th:text="${p.name}"></span>

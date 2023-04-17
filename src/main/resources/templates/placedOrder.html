@@ -7,10 +7,10 @@
 What you have ordered:
 <body>
     <div th:each="o : ${customerorder}">
-        Id of order: <p th:text="${o.id}"></p>
+        Id of order: <td th:text="${o.id}"></td>
         <div th:each="ci : ${o.cartItems}">
-            Product name: <p th:text="${ci.product.getName()}"></p>
-            Amount: <p th:text="${ci.amount}"></p>
+            Product name: <td th:text="${ci.product.getName()}"></td>
+            Amount: <td th:text="${ci.amount}"></td>
         </div>
     </div>
 </body>
