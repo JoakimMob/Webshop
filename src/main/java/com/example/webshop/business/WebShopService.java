@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,7 +22,6 @@ public class WebShopService {
     Product product;
     Cart cart;
 
-    List<CustomerOrder> customerOrder;
 
     public Customer login(String loginUser, String password) {
         List<Customer> customerList = customerRepository.findByEmailAndPassword(loginUser, password);
@@ -33,7 +31,10 @@ public class WebShopService {
 
     public WebShopService() {
         cart=new Cart();
-        customerOrder = new ArrayList<>();
+    }
+
+    public List<Product>findProduct(String productName){
+        return productRepository.findByName(productName);
     }
 
     public List<Product> getAllProducts() {
@@ -59,8 +60,8 @@ public class WebShopService {
     }
 
     public void addToOrder(){
-        customerOrder.add(new CustomerOrder(getCart().getCartItems()));
-        customer.setCustomerOrders(customerOrder);
+        customer.addOrder(new CustomerOrder(customer, getCart().getCartItems()));
+        customer = customerRepository.save(customer);
         clearCart();
     }
 
@@ -68,8 +69,8 @@ public class WebShopService {
         cart = new Cart();
     }
 
-    public List<CustomerOrder> getCustomerOrder(){
-        return customerOrder;
+    public List<CustomerOrder> getCustomerOrders(){
+        return customer.getCustomerOrders();
     }
 
     public Cart getCart(){

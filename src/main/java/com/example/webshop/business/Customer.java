@@ -26,6 +26,10 @@ public class Customer {
     public Customer() {
     }
 
+    public void addOrder(CustomerOrder customerOrder){
+        customerOrders.add(customerOrder);
+    }
+
     public Customer(Long id, String email, String password, List<CustomerOrder> customerOrders) {
         this.id = id;
         this.email = email;

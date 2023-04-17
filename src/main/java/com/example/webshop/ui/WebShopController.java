@@ -71,8 +71,14 @@ public class WebShopController {
     @PostMapping("/placeorder")
     public String placeOrder(Model m){
         webShopService.addToOrder();
-        m.addAttribute("customerorder", webShopService.getCustomerOrder());
+        m.addAttribute("customerorders", webShopService.getCustomerOrders());
         return "placedOrder";
+    }
+
+    @PostMapping("/showspecificproduct")
+    public String searchForSpecificProduct(Model m, @RequestParam String searchedName){
+        m.addAttribute("products", webShopService.findProduct(searchedName));
+        return "productSite";
     }
 
 
