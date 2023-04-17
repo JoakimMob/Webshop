@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+What you have ordered:
 <body>
-
+    <div th:each="o : ${customerorder}">
+        Id of order: <p th:text="${o.id}"></p>
+        <div th:each="ci : ${o.cartItems}">
+            Product name: <p th:text="${ci.product.getName()}"></p>
+            Amount: <p th:text="${ci.amount}"></p>
+        </div>
+    </div>
 </body>
 </html>

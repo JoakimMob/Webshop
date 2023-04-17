@@ -15,6 +15,7 @@ public class CustomerOrder {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<CartItem> cartItems;
 
+
     public CustomerOrder(Customer customer, List<CartItem> cartItems) {
         this.customer = customer;
         this.cartItems = cartItems;
