@@ -20,6 +20,9 @@ public class WebShopController {
         m.addAttribute("person", webShopService.login(loginUser, password));
         m.addAttribute("products", webShopService.getAllProducts());
         m.addAttribute("category", webShopService.getAllCategories());
+        if (webShopService.getAdminLogin()){
+            return "adminPage";
+        }
         return "productSite";
     }
 
@@ -95,6 +98,19 @@ public class WebShopController {
         m.addAttribute("category", webShopService.getAllCategories());
         m.addAttribute("products", webShopService.findProductByCategory(chosenCategory));
         return "productSite";
+    }
+
+    @GetMapping("/showAllOrders")
+    public String addShowAllOrdersSite(Model m){
+        m.addAttribute("customersordersadmin", webShopService.getAllCustomerOrders());
+        m.addAttribute("customer", webShopService.getAllCustomers());
+        return "showAllOrders";
+    }
+
+    @PostMapping("/showAllOrders")
+    public String showAllOrdersAsAdmin(Model m){
+        m.addAttribute("customersordersadmin", webShopService.getAllCustomerOrders());
+        return "showAllOrders";
     }
 
 

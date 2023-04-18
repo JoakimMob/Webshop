@@ -14,11 +14,21 @@ public class CustomerOrder {
     private Long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     List<CartItem> cartItems;
+    Boolean shipped;
 
 
     public CustomerOrder(Customer customer, List<CartItem> cartItems) {
         this.customer = customer;
         this.cartItems = cartItems;
+        this.shipped = false;
+    }
+
+    public Boolean getShipped() {
+        return shipped;
+    }
+
+    public void setShipped(Boolean shipped) {
+        this.shipped = shipped;
     }
 
     public CustomerOrder(List<CartItem> cartItems){

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:each="o : ${customersordersadmin}">
+  <div th:each="ci : ${o.cartItems}">
+    <div th:each="c : ${customer}">
+      Customer:
+      <td th:text="${c.email}"></td>
+      Product name :
+      <td th:text=" ${ci.product.getName()}"></td>
+      : Amount :
+      <td th:text="${ci.amount}"></td>
+      : Ship :
+      <td th:text="${o.shipping}"></td>
+      <form action="/shipProduct" method="post">
+        Ship: <input type="submit" name="shipped" value="Ship">
+      </form>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

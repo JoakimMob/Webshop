@@ -1,6 +1,7 @@
 package com.example.webshop.business;
 
 import com.example.webshop.data.CustomerRepository;
+import com.example.webshop.data.OrderRepository;
 import com.example.webshop.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,13 @@ public class WebShopService {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    OrderRepository orderRepository;
+
     Customer customer;
     Product product;
     Cart cart;
+    CustomerOrder customerOrder;
 
 
     public Customer login(String loginUser, String password) {
@@ -31,10 +36,19 @@ public class WebShopService {
 
     public WebShopService() {
         cart=new Cart();
+        customerOrder= new CustomerOrder(customer, cart.getCartItems());
     }
 
     public List<Product>findProduct(String productName){
         return productRepository.findByName(productName);
+    }
+
+    public List<CustomerOrder> getAllCustomerOrders(){
+        return orderRepository.findAll();
+    }
+
+    public List<Customer> customerList(){
+        return customerRepository.findAll();
     }
 
     public List<Product> getAllCategories(){
@@ -96,5 +110,9 @@ public class WebShopService {
             return "User now registered";
         }
         return "User already exists";
+    }
+
+    public Boolean getAdminLogin(){
+        return customer.isAdmin();
     }
 }
