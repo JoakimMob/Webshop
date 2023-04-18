@@ -29,8 +29,12 @@ public class WebShopController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestParam String loginUser, @RequestParam String password, Model m) {
-        String check = webShopService.checkIfUserExists(loginUser, password);
+    public String register(@RequestParam String loginUser, @RequestParam String password,
+                           @RequestParam(value = "adminBox", required = false) Boolean adminBox, Model m) {
+        if (adminBox==null){
+            adminBox = false;
+        }
+        String check = webShopService.checkIfUserExists(loginUser, password, adminBox);
         m.addAttribute("check", check);
         return "register";
     }

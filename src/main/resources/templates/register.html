@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -9,6 +9,7 @@ Login:
 <form action="/register" method="post">
   Email: <input type="text" name="loginUser"> </b>
   Password: <input type="text" name="password"> </b>
+  Admin: <input type="checkbox" name="adminBox"> </b>
   <input type="submit" value="Submit">
 </form>
 <p th:text="${check}"></p>

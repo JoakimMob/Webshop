@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "id", nullable = false)
+    @Column(name = "id", nullable = false)
     private Long id;
     @Email
     @NotBlank
@@ -22,25 +22,39 @@ public class Customer {
     private String password;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<CustomerOrder> customerOrders;
+    private boolean admin;
 
     public Customer() {
     }
 
-    public void addOrder(CustomerOrder customerOrder){
+    public void addOrder(CustomerOrder customerOrder) {
         customerOrders.add(customerOrder);
     }
 
-    public Customer(Long id, String email, String password, List<CustomerOrder> customerOrders) {
+    public Customer(Long id, String email, String password, List<CustomerOrder> customerOrders, boolean admin) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.customerOrders = customerOrders;
+        this.admin = admin;
+    }
+
+    public Customer(String email, String password, boolean admin) {
+        this.email = email;
+        this.password = password;
+        customerOrders = new ArrayList<>();
+        this.admin = admin;
     }
 
     public Customer(String email, String password) {
         this.email = email;
         this.password = password;
-        customerOrders= new ArrayList<>();
+        customerOrders = new ArrayList<>();
+        this.admin = false;
+    }
+
+    public boolean isAdmin(){
+        return admin;
     }
 
     public List<CustomerOrder> getCustomerOrders() {

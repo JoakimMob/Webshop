@@ -89,10 +89,10 @@ public class WebShopService {
         return cart.removeItemFromCart(id);
     }
 
-    public String checkIfUserExists(String loginUser, String password) {
+    public String checkIfUserExists(String loginUser, String password, boolean admin) {
         List<Customer> customerList = customerRepository.findByEmailAndPassword(loginUser, password);
         if (customerList.isEmpty()) {
-            customer = customerRepository.save(new Customer(loginUser, password));
+            customer = customerRepository.save(new Customer(loginUser, password, admin));
             return "User now registered";
         }
         return "User already exists";

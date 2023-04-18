@@ -46,7 +46,7 @@ public class CartItem {
         this.amount = amount;
     }
 
-    public void removeOneFromAmount(){
+    public void removeOneFromAmount() {
         this.amount--;
     }
 }
