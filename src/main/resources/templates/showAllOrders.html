@@ -5,23 +5,22 @@
   <title>Title</title>
 </head>
 <body>
-<div th:each="o : ${customersordersadmin}">
-  <div th:each="ci : ${o.cartItems}">
-    <div th:each="c : ${customer}">
+<div th:each="co : ${customersordersadmin}">
       Customer:
-      <td th:text="${c.email}"></td>
-      Product name :
-      <td th:text=" ${ci.product.getName()}"></td>
+      <td th:text="${co.customer.email}"></td>
+      <div th:each="ci : ${co.cartItems}">
+      : Product name :
+      <td th:text=" ${ci.product.name}"></td>
       : Amount :
       <td th:text="${ci.amount}"></td>
       : Ship :
-      <td th:text="${o.shipping}"></td>
-      <form action="/shipProduct" method="post">
-        Ship: <input type="submit" name="shipped" value="Ship">
-      </form>
-    </div>
+      <td th:text="${co.shipped}"></td>
 
-  </div>
+      </div>
+    <form action="/showAllOrders" method="post">
+        <input type="hidden" name="ship"  th:value="${co.id}">
+        <input type="submit" name="shipped" value="Ship">
+    </form>
 </div>
 </body>
 </html>

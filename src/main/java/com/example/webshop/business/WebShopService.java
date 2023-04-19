@@ -49,9 +49,6 @@ public class WebShopService {
         return orderRepository.findAll();
     }
 
-    public List<Customer> customerList(){
-        return customerRepository.findAll();
-    }
 
     public Set<String> getAllCategories(){
         Set<String> categories= new TreeSet<>();
@@ -120,5 +117,9 @@ public class WebShopService {
 
     public Boolean getAdminLogin(){
         return customer.isAdmin();
+    }
+
+    public void saveOrder(CustomerOrder customerOrder){
+        customerOrder = orderRepository.save(customerOrder);
     }
 }
