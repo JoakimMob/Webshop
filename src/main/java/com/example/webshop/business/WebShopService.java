@@ -25,9 +25,9 @@ public class WebShopService {
     OrderRepository orderRepository;
 
     Customer customer;
-    Product product;
+   // Product product;
     Cart cart;
-    CustomerOrder customerOrder;
+    //CustomerOrder customerOrder;
 
 
     public Customer login(String loginUser, String password) {
@@ -38,7 +38,6 @@ public class WebShopService {
 
     public WebShopService() {
         cart = new Cart();
-        customerOrder = new CustomerOrder(cart.getCartItems(), customer);
     }
 
     public List<Product> findProduct(String productName) {
@@ -75,6 +74,7 @@ public class WebShopService {
     }
 
     public Product addProductToDB(String productName, String productCategory, Double productPrice) {
+        Product product;
         product = productRepository.save(new Product(productName, productCategory, productPrice));
         return product;
     }
