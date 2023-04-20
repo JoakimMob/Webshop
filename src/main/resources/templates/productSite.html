@@ -6,11 +6,11 @@
 </head>
 <body>
 <form action="/showspecificproduct" method="post">
-  Search bar: <input type="text" name="specifiedProduct">
+  Search bar: <input type="text" name="searchedName">
   <input type="submit" th:value="Submit">
 </form>
 <form action="/showspecificcategory" method="post">
-  <select name="chosencategory" onchange="this.form.submit()">
+  <select name="chosenCategory" onchange="this.form.submit()">
     <option>--</option>
     <option th:each="c : ${category}" th:text="${c}" th:value="${c}">
     </option>
@@ -28,5 +28,6 @@
 </div>
 
 <a href="/showcart">Show Cart</a>
+  <a href="/">Back to login</a>
 </body>
 </html>

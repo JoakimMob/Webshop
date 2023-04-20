@@ -9,7 +9,7 @@ public class CustomerOrder {
     @ManyToOne
     Customer customer;
     @Id
-    @GeneratedValue ( strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -17,7 +17,7 @@ public class CustomerOrder {
     Boolean shipped;
 
 
-    public CustomerOrder(Customer customer, List<CartItem> cartItems) {
+    public CustomerOrder(List<CartItem> cartItems, Customer customer) {
         this.customer = customer;
         this.cartItems = cartItems;
         this.shipped = false;
@@ -31,7 +31,7 @@ public class CustomerOrder {
         this.shipped = shipped;
     }
 
-    public CustomerOrder(List<CartItem> cartItems){
+    public CustomerOrder(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
 

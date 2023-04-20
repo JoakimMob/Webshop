@@ -37,28 +37,28 @@ public class WebShopService {
     }
 
     public WebShopService() {
-        cart=new Cart();
-        customerOrder= new CustomerOrder(customer, cart.getCartItems());
+        cart = new Cart();
+        customerOrder = new CustomerOrder(cart.getCartItems(), customer);
     }
 
-    public List<Product>findProduct(String productName){
+    public List<Product> findProduct(String productName) {
         return productRepository.findByName(productName);
     }
 
-    public List<CustomerOrder> getAllCustomerOrders(){
+    public List<CustomerOrder> getAllCustomerOrders() {
         return orderRepository.findAll();
     }
 
 
-    public Set<String> getAllCategories(){
-        Set<String> categories= new TreeSet<>();
-        for (Product p: productRepository.findAll()) {
+    public Set<String> getAllCategories() {
+        Set<String> categories = new TreeSet<>();
+        for (Product p : productRepository.findAll()) {
             categories.add(p.getCategory());
         }
         return categories;
     }
 
-    public List<Product> findProductByCategory(String category){
+    public List<Product> findProductByCategory(String category) {
         return productRepository.findByCategory(category);
     }
 
@@ -66,11 +66,11 @@ public class WebShopService {
         return productRepository.findAll();
     }
 
-    public List<Customer> getAllCustomers(){
+    public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
 
-    public Product getByIdProduct(long id){
+    public Product getByIdProduct(long id) {
         return productRepository.findById(id).get();
     }
 
@@ -79,30 +79,30 @@ public class WebShopService {
         return product;
     }
 
-    public Cart addProductToCart(Long id, int amount){
+    public Cart addProductToCart(Long id, int amount) {
         cart.cartItems.add(new CartItem(getByIdProduct(id), amount));
         return cart;
     }
 
-    public void addToOrder(){
-        customer.addOrder(new CustomerOrder(customer, getCart().getCartItems()));
+    public void addToOrder() {
+        customer.addOrder(new CustomerOrder( getCart().getCartItems(),customer));
         customer = customerRepository.save(customer);
         clearCart();
     }
 
-    public void clearCart(){
+    public void clearCart() {
         cart = new Cart();
     }
 
-    public List<CustomerOrder> getCustomerOrders(){
+    public List<CustomerOrder> getCustomerOrders() {
         return customer.getCustomerOrders();
     }
 
-    public Cart getCart(){
+    public Cart getCart() {
         return cart;
     }
 
-    public List<CartItem> removeCartItem(int id){
+    public List<CartItem> removeCartItem(int id) {
         return cart.removeItemFromCart(id);
     }
 
@@ -115,11 +115,11 @@ public class WebShopService {
         return "User already exists";
     }
 
-    public Boolean getAdminLogin(){
+    public Boolean getAdminLogin() {
         return customer.isAdmin();
     }
 
-    public void saveOrder(CustomerOrder customerOrder){
+    public void saveOrder(CustomerOrder customerOrder) {
         customerOrder = orderRepository.save(customerOrder);
     }
 }

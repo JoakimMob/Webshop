@@ -108,9 +108,9 @@ public class WebShopController {
     }
 
     @PostMapping("/showAllOrders")
-    public String showAllOrdersAsAdmin(Model m, @RequestParam Integer shipping){
-        webShopService.getAllCustomerOrders().get(shipping-1).setShipped(true);
-        webShopService.saveOrder(webShopService.getAllCustomerOrders().get(shipping-1));
+    public String showAllOrdersAsAdmin(Model m, @RequestParam Integer shipped){
+        webShopService.getAllCustomerOrders().get(shipped-1).setShipped(true);
+        webShopService.saveOrder(webShopService.getAllCustomerOrders().get(shipped-1));
         m.addAttribute("customer", webShopService.getAllCustomers());
         m.addAttribute("customersordersadmin", webShopService.getAllCustomerOrders());
         return "showAllOrders";
