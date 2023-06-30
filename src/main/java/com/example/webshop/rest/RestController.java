@@ -13,29 +13,29 @@ public class RestController {
     @Autowired
     WebShopService service;
 
-    @GetMapping("rest/product/all")
+    @GetMapping("rest/allproducts")
     public List<Product> allProducts(){
         return service.getAllProducts();
     }
-    @GetMapping("rest/product/id/{id}")
+    @GetMapping("rest/productbyid/{id}")
     public Product getProduct(@PathVariable Integer id){
         return service.getByIdProduct(id);
     }
-    @GetMapping("rest/product/category/{category}")
-    public List<Product> getCategory(@PathVariable String category){
+    @GetMapping("rest/productbycategory")
+    public List<Product> getCategory(@RequestParam String category){
         return service.findProductByCategory(category);
     }
     @DeleteMapping("rest/deleteproduct/{id}")
     public List<Product> deleteProduct(@PathVariable Integer id){
         return service.deleteProduct(id);
     }
-    @PostMapping("rest/addproduct/{name}/{category}/{price}")
-    public List<Product> addProduct(@PathVariable String name, @PathVariable String category, @PathVariable Double price){
+    @PostMapping("rest/addproduct")
+    public List<Product> addProduct(@RequestParam String name, @RequestParam String category, @RequestParam Double price){
         service.addProductToDB(name,category, price);
         return service.getAllProducts();
     }
-    @PutMapping("rest/updateprice/{id}/{price}")
-    public List<Product> updateProductPrice(@PathVariable Integer id, @PathVariable Double price){
+    @PutMapping("rest/updateprice")
+    public List<Product> updateProductPrice(@RequestParam Integer id, @RequestParam Double price){
         service.updatePrice(id,price);
         return service.getAllProducts();
     }
