@@ -30,6 +30,9 @@ public class Product {
         this.category = category;
         this.price = price;
     }
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
     public Long getId() {
         return id;

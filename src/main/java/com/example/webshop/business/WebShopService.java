@@ -25,7 +25,7 @@ public class WebShopService {
     OrderRepository orderRepository;
 
     Customer customer;
-   // Product product;
+    Product product;
     Cart cart;
     //CustomerOrder customerOrder;
 
@@ -55,6 +55,18 @@ public class WebShopService {
             categories.add(p.getCategory());
         }
         return categories;
+    }
+
+    public List<Product> deleteProduct(Integer id){
+        productRepository.deleteById(Long.valueOf(id));
+        return productRepository.findAll();
+    }
+
+    public Product updatePrice(Integer id, Double price){
+        product= productRepository.findById(Long.valueOf(id)).get();
+        product.setPrice(price);
+        product= productRepository.save(product);
+        return product;
     }
 
     public List<Product> findProductByCategory(String category) {
